@@ -2,15 +2,16 @@ import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { buttonVariants } from "./ui/button";
 import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/server";
+import { ArrowRight } from "lucide-react";
 
 const Navbar = () => {
     return (
-        <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
+        <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg  transition-all">
             <MaxWidthWrapper>
-                <div className="flex h-14 items-center justify-between border-b border-zinc-200">
+                <div className="sm:mx-4 flex h-14 items-center justify-between border-b border-zinc-200">
                     {/* Logo (left) */}
                     <Link href="/" className="flex z-40 font-semibold">
-                        <span>Insights.</span>
+                        <span className="ml-4">Insights.</span>
                     </Link>
 
                     {/* Button to navigate */}
@@ -38,7 +39,8 @@ const Navbar = () => {
                                     size: "sm",
                                 })}
                             >
-                                Sign up
+                                Get started{" "}
+                                <ArrowRight className="ml-1.5 h-5 w-5" />
                             </RegisterLink>
                         </>
                     </div>

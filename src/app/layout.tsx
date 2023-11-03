@@ -17,14 +17,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" className="dark">
+        <html lang="en" className="light">
             <body
                 className={cn(
                     "min-h-screen font-sans antialiased grainy",
                     inter.className
                 )}
             >
-                <Navbar></Navbar>
+                <Navbar />
                 {/* The children here is all pages on our app */}
                 {children}
             </body>

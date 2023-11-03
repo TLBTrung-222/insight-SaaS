@@ -35,6 +35,7 @@ export default function Home() {
                 </Link>
             </MaxWidthWrapper>
 
+            {/* Decorater and visualize value proposition */}
             <div className="relative isolate">
                 <div className="pointer-events-none absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
                     <div
