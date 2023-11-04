@@ -8,7 +8,7 @@ const Navbar = () => {
     return (
         <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg  transition-all">
             <MaxWidthWrapper>
-                <div className="sm:mx-4 flex h-14 items-center justify-between border-b border-zinc-200">
+                <div className="flex h-14 items-center justify-between border-b border-zinc-200">
                     {/* Logo (left) */}
                     <Link href="/" className="flex z-40 font-semibold">
                         <span className="ml-4">Insights.</span>
