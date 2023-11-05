@@ -12,7 +12,12 @@ const Page = () => {
     // the reason for the query parameter is because after we force user to sign in/up,
     // we want to redirect user to the page they were stand on, avoid disrupting their flow
 
-    return <div>{user.email}</div>;
+    return (
+        <div>
+            {user.email} <br />
+            {user.id}
+        </div>
+    );
 };
 
 export default Page;
