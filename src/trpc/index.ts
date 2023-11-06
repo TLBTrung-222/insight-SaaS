@@ -4,6 +4,8 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { privateProcedure, publicProcedure, router } from "./trpc";
 import { TRPCError } from "@trpc/server";
 import { db } from "@/db";
+import { z } from "zod"; // this lib use for validation in API request
+
 export const appRouter = router({
     // define our backend API logic here
     authCallback: publicProcedure.query(async () => {
@@ -36,14 +38,43 @@ export const appRouter = router({
     }),
 
     getUserFiles: privateProcedure.query(async ({ ctx }) => {
+        // get user from context (passed from middleware)
         const { userId } = ctx;
 
+        // list all files from this user
         return await db.file.findMany({
             where: {
-                id: userId,
+                userId: userId,
             },
         });
     }),
+
+    // this is post request
+    // we are saying when anyone call this procedure, they need to pass in
+    // an object with id as a string type
+    // Why we need this? Typscript is run at buildtime, the code below run at run time
+    deleteFile: privateProcedure
+        .input(z.object({ id: z.string() }))
+        .mutation(async ({ ctx, input }) => {
+            const { userId } = ctx;
+
+            const file = await db.file.findFirst({
+                where: {
+                    id: input.id,
+                    userId: userId, // make sure only the one who own that file can delete that file (not others user's file)
+                },
+            });
+
+            if (!file) throw new TRPCError({ code: "NOT_FOUND" });
+
+            await db.file.delete({
+                where: {
+                    id: input.id,
+                },
+            });
+
+            return file;
+        }),
 });
 
 // Export type router type signature,
